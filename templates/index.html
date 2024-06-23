@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Daerah Miskin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Klasifikasi Daerah Miskin</h1>
+        <form action="/predict" method="post" class="space-y-4">
+            <div>
+                <label for="persentase_penduduk_miskin" class="block text-sm font-medium text-gray-700">Persentase
+                    Penduduk Miskin (%):</label>
+                <input type="text" id="persentase_penduduk_miskin" name="persentase_penduduk_miskin"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="rata_rata_lama_sekolah" class="block text-sm font-medium text-gray-700">Rata-rata Lama
+                    Sekolah (Tahun):</label>
+                <input type="text" id="rata_rata_lama_sekolah" name="rata_rata_lama_sekolah"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="pengeluaran_per_kapita" class="block text-sm font-medium text-gray-700">Pengeluaran per
+                    Kapita (Ribu Rupiah):</label>
+                <input type="text" id="pengeluaran_per_kapita" name="pengeluaran_per_kapita"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="indeks_pembangunan_manusia" class="block text-sm font-medium text-gray-700">Indeks
+                    Pembangunan Manusia:</label>
+                <input type="text" id="indeks_pembangunan_manusia" name="indeks_pembangunan_manusia"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="umur_harapan_hidup" class="block text-sm font-medium text-gray-700">Umur Harapan Hidup
+                    (Tahun):</label>
+                <input type="text" id="umur_harapan_hidup" name="umur_harapan_hidup"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="persentase_sanitasi" class="block text-sm font-medium text-gray-700">Persentase Sanitasi
+                    Layak (%):</label>
+                <input type="text" id="persentase_sanitasi" name="persentase_sanitasi"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="persentase_air_minum" class="block text-sm font-medium text-gray-700">Persentase Akses Air
+                    Minum Layak (%):</label>
+                <input type="text" id="persentase_air_minum" name="persentase_air_minum"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="tingkat_pengangguran" class="block text-sm font-medium text-gray-700">Tingkat Pengangguran
+                    Terbuka (%):</label>
+                <input type="text" id="tingkat_pengangguran" name="tingkat_pengangguran"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="tingkat_partisipasi_angkatan_kerja" class="block text-sm font-medium text-gray-700">Tingkat
+                    Partisipasi Angkatan Kerja (%):</label>
+                <input type="text" id="tingkat_partisipasi_angkatan_kerja" name="tingkat_partisipasi_angkatan_kerja"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label for="pdrb" class="block text-sm font-medium text-gray-700">PDRB (Rupiah):</label>
+                <input type="text" id="pdrb" name="pdrb"
+                    class="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+            </div>
+
+            <div class="text-center">
+                <button type="submit"
+                    class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600">Predict</button>
+            </div>
+        </form>
+        <div id="result" class="mt-4 text-center text-lg font-semibold text-gray-700"></div>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = `Prediction: ${result.prediction}`;
+        });
+    </script>
+</body>
+
+</html>

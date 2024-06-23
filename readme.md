@@ -28,3 +28,4 @@
 
 10. **PDRB**: Nilai total barang dan jasa yang dihasilkan di daerah tersebut.
 
+Data diperoleh dari [Kaggle](https://www.kaggle.com/datasets/ermila/klasifikasi-tingkat-kemiskinan-di-indonesia).
